@@ -99,4 +99,16 @@ describe('GraphQLMockClient', () => {
       })
     ).toThrow(`Syntax Error: Unexpected Name "error"`)
   })
+
+  it('throws when the mocks option is not an object', () => {
+    expect(() => {
+      new GraphQLMockClient({ mocks: 'mocks' })
+    }).toThrow('GraphQLMockClient: config.mocks must be an object')
+  })
+
+  it('throws when the no mocks are provided', () => {
+    expect(() => {
+      new GraphQLMockClient()
+    }).toThrow('GraphQLMockClient: config.mocks must be an object')
+  })
 })
