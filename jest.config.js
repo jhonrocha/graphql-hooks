@@ -18,6 +18,12 @@ const projects = [
     displayName: 'graphql-hooks-ssr',
     testMatch: ['<rootDir>/packages/graphql-hooks-ssr/**/*.test.js'],
     testEnvironment: 'jsdom'
+  },
+  {
+    roots: ['./packages/graphql-hooks-mock-client'],
+    displayName: 'graphql-hooks-mock-client',
+    testMatch: ['<rootDir>/packages/graphql-hooks-mock-client/**/*.test.js'],
+    testEnvironment: 'jsdom'
   }
 ]
 module.exports = {
