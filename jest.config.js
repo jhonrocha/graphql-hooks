@@ -21,6 +21,10 @@ const projects = [
   },
   {
     roots: ['./packages/graphql-hooks-mock-client'],
+    coveragePathIgnorePatterns: [
+      '/node_modules/',
+      '<rootDir>/packages/graphql-hooks/lib'
+    ],
     displayName: 'graphql-hooks-mock-client',
     testMatch: ['<rootDir>/packages/graphql-hooks-mock-client/**/*.test.js'],
     testEnvironment: 'jsdom'
