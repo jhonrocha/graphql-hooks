@@ -42,7 +42,7 @@ describe('MyComponent', () => {
   )
 
   it('renders the users list', async () => {
-    render(<Component />, { wrapper: Wrapper })
+    render(<MyComponent />, { wrapper: Wrapper })
 
     // The first render is in loading state
     expect(screen.getByText(/loading.../i)).toBeTruthy()
