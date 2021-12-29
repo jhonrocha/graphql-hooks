@@ -5,6 +5,8 @@ import React from 'react'
 import T from 'prop-types'
 import { mocks } from './mocks'
 
+// In this file we define a custom render function
+// that already comes with our mock client
 const client = new GraphQLMockClient({
   mocks
 })

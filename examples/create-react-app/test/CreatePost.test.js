@@ -8,6 +8,8 @@ describe('CreatePost', () => {
   it('should submit the new post', async () => {
     const createSpy = jest.fn()
 
+    // We create a new client here in order to check
+    // if and how the mutation is called
     const client = new GraphQLMockClient({
       mocks: {
         mutation: {
