@@ -4,7 +4,7 @@ import React from 'react'
 import CreatePost, { createPostMutation } from './CreatePost'
 
 export const allPostsQuery = `
-  query {
+  query GetAllPosts {
     allPosts {
       id
       title

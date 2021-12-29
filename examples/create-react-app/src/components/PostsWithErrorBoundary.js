@@ -5,7 +5,7 @@ import T from 'prop-types'
 import ErrorBoundary from './ErrorBoundary'
 
 export const allPostsQuery = `
-  query {
+  query GetAllPosts {
     allPosts {
       id
       title
@@ -15,7 +15,7 @@ export const allPostsQuery = `
 `
 
 export const errorAllPostsQuery = `
-  query {
+  query GetAllPostsWithError {
     allPosts {
       id
       title
