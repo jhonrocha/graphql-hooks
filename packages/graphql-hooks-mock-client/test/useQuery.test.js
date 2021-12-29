@@ -1,4 +1,4 @@
-import { GraphQLMockClient } from '../index'
+import { GraphQLMockClient } from '../src/index'
 import { ClientContext, useQuery } from 'graphql-hooks'
 import React from 'react'
 import { render, screen } from '@testing-library/react'

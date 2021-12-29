@@ -1,4 +1,4 @@
-import { GraphQLMockClient } from '../index'
+import { GraphQLMockClient } from '../src/index'
 
 describe('GraphQLMockClient, fallbackOnFetch: true', () => {
   const client = new GraphQLMockClient({

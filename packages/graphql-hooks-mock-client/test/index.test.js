@@ -1,4 +1,4 @@
-import { GraphQLMockClient } from '../index'
+import { GraphQLMockClient } from '../src/index'
 
 describe('GraphQLMockClient', () => {
   const client = new GraphQLMockClient({
@@ -28,6 +28,34 @@ describe('GraphQLMockClient', () => {
         }
       `,
       variables
+    })
+
+    expect(result).toEqual({
+      data: {
+        getVariables: variables
+      }
+    })
+  })
+
+  it('matches when operationName is provided', async () => {
+    const variables = { value: 1 }
+
+    const result = await client.request({
+      query: `
+        query GetVariables($data: Variables) {
+          getVariables(data: $variables) {
+            value
+          }
+        }
+
+        mutation SetVariables($data: Variables) {
+          setVariables(data: $variables) {
+            value
+          }
+        }
+      `,
+      variables,
+      operationName: 'GetVariables'
     })
 
     expect(result).toEqual({
@@ -70,6 +98,47 @@ describe('GraphQLMockClient', () => {
         `
       })
     ).toThrow(/couldn't match any mocks for "mutation GetVariables"/)
+  })
+
+  it('throws when there are multiple operations', async () => {
+    expect(() =>
+      client.request({
+        query: `
+          query GetVariables($data: Variables) {
+            getVariables(data: $variables) {
+              value
+            }
+          }
+
+          mutation SetVariables($data: Variables) {
+            setVariables(data: $variables) {
+              value
+            }
+          }
+        `
+      })
+    ).toThrow(/multiple operations are defined inside the query/)
+  })
+
+  it('throws when there is no match for the operationName', async () => {
+    expect(() =>
+      client.request({
+        operationName: 'foo',
+        query: `
+          query GetVariables($data: Variables) {
+            getVariables(data: $variables) {
+              value
+            }
+          }
+
+          mutation SetVariables($data: Variables) {
+            setVariables(data: $variables) {
+              value
+            }
+          }
+        `
+      })
+    ).toThrow(/there is no foo operation inside the query/)
   })
 
   it('throws when the operation name is not provided', async () => {
