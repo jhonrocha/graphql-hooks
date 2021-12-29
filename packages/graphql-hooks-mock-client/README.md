@@ -26,9 +26,11 @@ import { MyComponent } from '../components'
 
 describe('MyComponent', () => {
   const mockClient = new GraphQLMockClient({
+    // This is where you define your mocks
     mocks: {
       query: {
-        HomePage({ variables }) {
+        // This mock will intercept every `query` named `GetUsersList`
+        GetUsersList({ variables }) {
           return { data: { users: users.slice(0, variables.limit) } }
         }
       }
@@ -42,7 +44,15 @@ describe('MyComponent', () => {
   )
 
   it('renders the users list', async () => {
-    render(<MyComponent />, { wrapper: Wrapper })
+    const query = `
+      query GetUsersList($limit: Int!) {
+        users(limit: $limit) {
+          name
+        }
+      }
+    `
+
+    render(<MyComponent query={query} />, { wrapper: Wrapper })
 
     // The first render is in loading state
     expect(screen.getByText(/loading.../i)).toBeTruthy()
