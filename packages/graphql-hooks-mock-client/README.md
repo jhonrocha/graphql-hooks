@@ -58,6 +58,8 @@ The mock client will match every query by operation kind (query/mutation) and by
 You can use it also in your application to mock some of the requests by enabling the `fallbackOnFetch` option.
 In that case it will fall back to the normal `GraphQLClient` behavoir when an operation mock is not provided.
 
+Check out the [create-react-app example tests](examples/create-react-app/test) for a more in-depth usage example.
+
 ### API
 
 ## `GraphQLMockClient`
