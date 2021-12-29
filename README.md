@@ -121,6 +121,7 @@ If you need a client that offers middleware and advanced cache configuration, th
   - [HTTP Get Support](#HTTP-Get-support)
   - [Authentication](#Authentication)
   - [Fragments](#Fragments)
+  - [Testing](#Testing)
   - [Migrating from Apollo](#Migrating-from-Apollo)
     - [ApolloClient ➡️ GraphQLClient](#apolloclient-️-graphqlclient)
     - [ApolloProvider ➡️ ClientContext.Provider](#apolloprovider-️-clientcontextprovider)
