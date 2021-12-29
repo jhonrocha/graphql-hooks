@@ -785,6 +785,10 @@ For more information about graphql-hooks clientContext refer to [GraphQLClient](
 
 Coming soon!
 
+## Testing
+
+Check out [graphql-hooks-mock-client](packages/graphql-hooks-mock-client) for an easy way to write tests with `graphql-hooks`
+
 ## Migrating from Apollo
 
 For a real life example, compare the next.js [with-apollo](https://github.com/zeit/next.js/tree/canary/examples/with-apollo) vs [with-graphql-hooks](https://github.com/zeit/next.js/tree/canary/examples/with-graphql-hooks). We have feature parity and the `main-*.js` bundle is a whopping **93% smaller** (7.9KB vs 116KB).
