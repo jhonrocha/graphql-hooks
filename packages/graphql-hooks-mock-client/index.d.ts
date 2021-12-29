@@ -1,18 +1,46 @@
-import { GraphQLClient, ClientOptions } from 'graphql-hooks'
+import type { GraphQLClient, ClientOptions } from 'graphql-hooks'
 
-export interface Mocks {
-  query: Record<string, GraphQLClient['request']>
-  mutation: Record<string, GraphQLClient['request']>
+interface Operation {
+  query: string
+  variables?: object
+  operationName?: string
+}
+
+interface HttpError {
+  status: number
+  statusText: string
+  body: string
+}
+
+interface APIError {
+  fetchError?: Error
+  httpError?: HttpError
+  graphQLErrors?: object[]
+}
+
+interface Result{
+  data?: object
+  error?: APIError
+}
+
+type requestMock = (
+  operation: Operation,
+  options?: object
+) => Promise<Result> | Result
+
+export interface GraphQLHooksMocks {
+  query?: Record<string, requestMock>
+  mutation?: Record<string, requestMock>
 }
 
 export class GraphQLMockClient extends GraphQLClient {
   constructor(
-    options: ClientOptions & {
-      mocks?: Mocks
+    options: Partial<ClientOptions> & {
+      mocks?: GraphQLHooksMocks
       fallbackOnFetch?: boolean
     }
   )
 
-  mocks?: Mocks
+  mocks?: GraphQLHooksMocks
   fallbackOnFetch?: boolean
 }

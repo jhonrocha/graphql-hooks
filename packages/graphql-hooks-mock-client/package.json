@@ -2,12 +2,13 @@
   "name": "graphql-hooks-mock-client",
   "version": "0.1.0",
   "description": "A mock client for graphql-hooks",
-  "main": "index.js",
+  "main": "lib/graphql-hooks-mock-client.js",
+  "module": "es/graphql-hooks-mock-client.js",
   "types": "index.d.ts",
   "scripts": {
     "clean": "rm -rf ./dist ./es ./lib",
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "prepublishOnly": "cp ../../LICENSE ."
+    "prepublishOnly": "cp ../../LICENSE .",
+    "build": "rollup -c"
   },
   "keywords": [
     "graphql",
