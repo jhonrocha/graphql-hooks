@@ -3,12 +3,34 @@ import { GraphQLMockClient } from 'graphql-hooks-mock-client'
 import { render } from '@testing-library/react'
 import React from 'react'
 import T from 'prop-types'
-import { mocks } from './mocks'
 
 // In this file we define a custom render function
 // that already comes with our mock client
+
 const client = new GraphQLMockClient({
-  mocks
+  schema: `
+    type Post {
+      id: String,
+      title: String,
+      url: String
+    }
+    type Query {
+      allPosts: [Post]
+    }
+  `,
+  resolvers: {
+    Query: {
+      allPosts() {
+        return [
+          {
+            id: 1,
+            title: 'Test',
+            url: 'https://example.com'
+          }
+        ]
+      }
+    }
+  }
 })
 
 const Wrapper = ({ children }) => {

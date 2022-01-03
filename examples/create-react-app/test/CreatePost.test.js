@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from './test-utils'
+import { render, screen, fireEvent, waitFor } from './test-utils'
 import CreatePost from '../src/components/CreatePost'
 import React from 'react'
 import { ClientContext } from 'graphql-hooks'
@@ -11,8 +11,8 @@ describe('CreatePost', () => {
     // We create a new client here in order to check
     // if and how the mutation is called
     const client = new GraphQLMockClient({
-      mocks: {
-        mutation: {
+      resolvers: {
+        Mutation: {
           CreatePost({ variables }) {
             createSpy(variables)
             return {
@@ -57,9 +57,11 @@ describe('CreatePost', () => {
       })
     )
 
-    expect(createSpy).toHaveBeenCalledWith({
-      title: 'Test',
-      url: 'https://example.com'
-    })
+    waitFor(() =>
+      expect(createSpy).toHaveBeenCalledWith({
+        title: 'Test',
+        url: 'https://example.com'
+      })
+    )
   })
 })

@@ -3,12 +3,17 @@ import { ClientContext, useQuery } from 'graphql-hooks'
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 
-describe('GraphQLMockClient', () => {
+describe('useQuery integration', () => {
   const mockClient = new GraphQLMockClient({
-    mocks: {
-      query: {
-        GetVariables({ variables }) {
-          return { data: variables }
+    schema: `
+      type Query {
+        value(value: Int): Int
+      }
+    `,
+    resolvers: {
+      Query: {
+        value(_, { value }) {
+          return value
         }
       }
     }
@@ -21,11 +26,11 @@ describe('GraphQLMockClient', () => {
     </ClientContext.Provider>
   )
 
-  it('matches the query GetVariables', async () => {
+  it('matches the query', async () => {
     const variables = { value: 1 }
     const query = `
-      query GetVariables($value: Int) {
-        value(value: $value) Int
+      query($value: Int) {
+        value(value: $value)
       }
     `
 

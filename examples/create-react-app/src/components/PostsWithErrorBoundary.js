@@ -16,12 +16,7 @@ export const allPostsQuery = `
 
 export const errorAllPostsQuery = `
   query GetAllPostsWithError {
-    allPosts {
-      id
-      title
-      url
-      boom
-    }
+    boom
   }
 `
 

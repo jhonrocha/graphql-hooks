@@ -23,24 +23,8 @@ interface Result{
   error?: APIError
 }
 
-type requestMock = (
-  operation: Operation,
-  options?: object
-) => Promise<Result> | Result
-
-export interface GraphQLHooksMocks {
-  query?: Record<string, requestMock>
-  mutation?: Record<string, requestMock>
-}
-
 export class GraphQLMockClient extends GraphQLClient {
   constructor(
-    options: Partial<ClientOptions> & {
-      mocks?: GraphQLHooksMocks
-      fallbackOnFetch?: boolean
-    }
+    options: Partial<ClientOptions>
   )
-
-  mocks?: GraphQLHooksMocks
-  fallbackOnFetch?: boolean
 }

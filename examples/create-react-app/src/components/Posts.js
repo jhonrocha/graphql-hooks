@@ -30,7 +30,7 @@ export default function Posts() {
 
 function PostList({ loading, error, data }) {
   if (loading) return 'Loading...'
-  if (error) return 'There was an error loading the posts :('
+  if (error) return JSON.stringify(error)
   if (!data || !data.allPosts || !data.allPosts.length) return 'No posts'
 
   return (
