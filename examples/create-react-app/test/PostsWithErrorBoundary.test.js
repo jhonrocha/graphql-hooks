@@ -13,7 +13,7 @@ describe('Posts', () => {
     )
 
     expect(
-      await screen.findByText(/There are some errors in your query/i)
+      await screen.findByText(/Something went wrong/i)
     ).toBeTruthy()
   })
 })

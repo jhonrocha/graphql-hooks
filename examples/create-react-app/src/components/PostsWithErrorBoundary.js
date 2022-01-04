@@ -15,8 +15,8 @@ export const allPostsQuery = `
 `
 
 export const errorAllPostsQuery = `
-  query GetAllPostsWithError {
-    boom
+  query GetAllPostsWithError($var: Boom) {
+    boom(var: $var)
   }
 `
 
