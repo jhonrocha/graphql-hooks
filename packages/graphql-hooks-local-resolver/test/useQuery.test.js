@@ -1,22 +1,24 @@
-import { GraphQLMockClient } from '../src/index'
-import { ClientContext, useQuery } from 'graphql-hooks'
+import { LocalResolver } from '../src/index'
+import { ClientContext, useQuery, GraphQLClient } from 'graphql-hooks'
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 
 describe('useQuery integration', () => {
-  const mockClient = new GraphQLMockClient({
-    schema: `
-      type Query {
-        value(value: Int): Int
-      }
-    `,
-    resolvers: {
-      Query: {
-        value(_, { value }) {
-          return value
+  const mockClient = new GraphQLClient({
+    local: new LocalResolver({
+      schema: `
+        type Query {
+          value(value: Int): Int
+        }
+      `,
+      resolvers: {
+        Query: {
+          value(_, { value }) {
+            return value
+          }
         }
       }
-    }
+    })
   })
 
   // eslint-disable-next-line react/prop-types

@@ -20,13 +20,13 @@ const projects = [
     testEnvironment: 'jsdom'
   },
   {
-    roots: ['./packages/graphql-hooks-mock-client'],
+    roots: ['./packages/graphql-hooks-local-resolver'],
     coveragePathIgnorePatterns: [
       '/node_modules/',
       '<rootDir>/packages/graphql-hooks/lib'
     ],
-    displayName: 'graphql-hooks-mock-client',
-    testMatch: ['<rootDir>/packages/graphql-hooks-mock-client/**/*.test.js'],
+    displayName: 'graphql-hooks-local-resolver',
+    testMatch: ['<rootDir>/packages/graphql-hooks-local-resolver/**/*.test.js'],
     testEnvironment: 'jsdom'
   },
   {

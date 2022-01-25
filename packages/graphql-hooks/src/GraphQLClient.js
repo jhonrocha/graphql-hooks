@@ -6,7 +6,7 @@ import isExtractableFileEnhanced from './isExtractableFileEnhanced'
 class GraphQLClient {
   constructor(config = {}) {
     // validate config
-    if (!config.url) {
+    if (!config.local && !config.url) {
       throw new Error('GraphQLClient: config.url is required')
     }
 
@@ -14,7 +14,12 @@ class GraphQLClient {
       throw new Error('GraphQLClient: config.fetch must be a function')
     }
 
-    if ((canUseDOM() || config.ssrMode) && !config.fetch && !fetch) {
+    if (
+      !config.local &&
+      (canUseDOM() || config.ssrMode) &&
+      !config.fetch &&
+      !fetch
+    ) {
       throw new Error(
         'GraphQLClient: fetch must be polyfilled or passed in new GraphQLClient({ fetch })'
       )
@@ -24,6 +29,7 @@ class GraphQLClient {
       throw new Error('GraphQLClient: config.cache is required when in ssrMode')
     }
 
+    this.local = config.local
     this.cache = config.cache
     this.headers = config.headers || {}
     this.ssrMode = config.ssrMode
@@ -185,6 +191,30 @@ class GraphQLClient {
   }
 
   request(operation, options = {}) {
+    if (this.local) {
+      // handles local resolver
+      if (this.local.resolve) {
+        return this.local.resolve(operation).then(({ errors, data }) =>
+          this.generateResult({
+            graphQLErrors: errors,
+            data
+          })
+        )
+      }
+
+      if (this.local[operation.query]) {
+        return Promise.resolve(this.local[operation.query](operation)).then(
+          data => ({ data })
+        )
+      } else if (!this.url) {
+        throw new Error(
+          "GraphQLClient: can't carry out the request, " +
+            'the local query is missing.\nOn ' +
+            operation.query
+        )
+      }
+    }
+
     let url = this.url
     const fetchOptions = this.getFetchOptions(
       operation,

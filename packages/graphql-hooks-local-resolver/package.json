@@ -1,9 +1,9 @@
 {
-  "name": "graphql-hooks-mock-client",
+  "name": "graphql-hooks-local-resolver",
   "version": "0.1.0",
   "description": "A mock client for graphql-hooks",
-  "main": "lib/graphql-hooks-mock-client.js",
-  "module": "es/graphql-hooks-mock-client.js",
+  "main": "lib/graphql-hooks-local-resolver.js",
+  "module": "es/graphql-hooks-local-resolver.js",
   "types": "index.d.ts",
   "scripts": {
     "clean": "rm -rf ./dist ./es ./lib",
@@ -37,5 +37,5 @@
   "bugs": {
     "url": "https://github.com/nearform/graphql-hooks/issues"
   },
-  "homepage": "https://github.com/nearform/graphql-hooks/blob/master/packages/graphql-hooks-mock-client#readme"
+  "homepage": "https://github.com/nearform/graphql-hooks/blob/master/packages/graphql-hooks-local-resolver#readme"
 }

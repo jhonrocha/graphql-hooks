@@ -9,7 +9,6 @@
   "dependencies": {
     "graphql-hooks": "^5.5.0",
     "graphql-hooks-memcache": "^2.2.2",
-    "graphql-hooks-mock-client": "^0.1.0",
     "json-graphql-server": "2.2.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
